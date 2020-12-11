@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import Navbar from './components/Navbar';
+import Routes from './Routes';
+import { logout } from './services/userWs';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class  App extends Component {
+
+	//New state in app
+	state = {
+		user : {}
+	}
+	logout = () => {
+		const { history } = this.props;
+		logout().then(() => {
+			localStorage.removeItem("user");
+			this.setState({ user: {} });
+			history.push("/login");
+		});
+	};
+	render(){
+		const {state,logout} = this;
+		return (
+			<div >
+				<Navbar user={state.user} logout={logout}/>
+				<Routes />
+			</div>
+		);
+	}
+
 }
 
 export default App;
