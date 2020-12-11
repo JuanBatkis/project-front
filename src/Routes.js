@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import AuthContainer from './containers/authContainer/AuthContainer';
 import SignupContainer from './containers/authContainer/SignupContainer';
